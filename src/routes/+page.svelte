@@ -1,10 +1,13 @@
 <script lang="ts">
 	import * as R from '$lib/rendering';
 	import * as G from '$lib/game';
-	import { Player } from './player';
+	import Ground from './Ground.svelte';
+	import Player1 from './Player1.svelte';
+	import Player2 from './Player2.svelte';
+	import Background from './Background.svelte';
 
-	const player1 = new Player();
-	const player2 = new Player();
+	const VW = 1024;
+	const VH = 576;
 </script>
 
 <div class="container">
@@ -12,17 +15,18 @@
 		images={{
 			bkgd1: '/imgs/scene/background/background_layer_1.png',
 			bkgd2: '/imgs/scene/background/background_layer_2.png',
-			tileset: '/imgs/scene/oak_woods_tileset.png'
+			tileset: '/imgs/scene/oak_woods_tileset.png',
+			hero1: { idle: '/imgs/hero1/Idle.png' },
+			hero2: { idle: '/imgs/hero2/Idle.png' }
 		}}
 	>
-		<R.Canvas width={1024} height={576}>
+		<R.Canvas width={VW} height={VH}>
 			<G.Scene>
-				<R.Sprite image="bkgd1" w="canvas" h="canvas" />
-				<R.Sprite image="bkgd2" w="canvas" h="canvas" />
-				<R.Tile image="tileset" w="canvas" h="canvas" />
+				<Background />
+				<Ground />
 
-				<R.Rect fillStyle="red" x={100} y={100} w={50} h={150} />
-				<R.Rect fillStyle="blue" x={400} y={200} w={50} h={150} />
+				<Player1 />
+				<Player2 />
 			</G.Scene>
 		</R.Canvas>
 	</G.ImagePreLoader>

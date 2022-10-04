@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { preloadImages } from '$lib/utils/images';
 
-	export let images: Record<string, string>;
+	export let images: Record<string, string | { [key: string]: string }>;
 
 	const preload = preloadImages(images);
 </script>

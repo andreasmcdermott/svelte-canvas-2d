@@ -1,4 +1,5 @@
 import { Entity } from '$lib/entities/entity';
+import { globals } from '$lib/globals';
 
 export class Rect extends Entity {
 	w: number;
@@ -23,10 +24,10 @@ export class Rect extends Entity {
 		this.h = h;
 		this.fillStyle = fillStyle;
 	}
-	draw() {
-		super.draw();
+	update() {
+		super.update();
 
-		this.context2d.fillStyle = this.fillStyle;
-		this.context2d.fillRect(this.x, this.y, this.w, this.h);
+		globals.context2d.fillStyle = this.fillStyle;
+		globals.context2d.fillRect(this.x, this.y, this.w, this.h);
 	}
 }

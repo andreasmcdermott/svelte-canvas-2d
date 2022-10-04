@@ -34,9 +34,9 @@ export class Scene {
 		}
 
 		for (const entity of entities) {
-			entity.draw();
+			entity.update();
 		}
 
-		requestAnimationFrame((currFrame) => this.update());
+		requestAnimationFrame(() => this.update());
 	}
 }

@@ -4,12 +4,15 @@
 	import { Tile } from '$lib/entities/tile';
 
 	export let image: string;
-	export let x: number = 0;
-	export let y: number = 0;
-	export let w: number | 'canvas';
-	export let h: number | 'canvas';
+	export let x: number;
+	export let y: number;
+	export let w: number;
+	export let h: number;
+	export let ts: number;
+	export let tx: number;
+	export let ty: number;
 
-	const entity = new Tile({ x, y, w, h, image });
+	const entity = new Tile({ x, y, w, h, image, ts, tx, ty });
 
 	onMount(() => {
 		add(entity);

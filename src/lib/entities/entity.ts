@@ -1,8 +1,4 @@
-import { globals } from '$lib/globals';
-
 export class Entity {
-	canvas: HTMLCanvasElement;
-	context2d: CanvasRenderingContext2D;
 	x: number;
 	y: number;
 
@@ -13,11 +9,8 @@ export class Entity {
 		x?: number;
 		y?: number;
 	} = {}) {
-		const { canvas, context2d } = globals;
-		this.canvas = canvas;
-		this.context2d = context2d;
 		this.x = x;
 		this.y = y;
 	}
-	draw() {}
+	update() {}
 }
