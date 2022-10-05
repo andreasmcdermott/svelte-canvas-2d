@@ -12,5 +12,7 @@ export class Entity {
 		this.x = x;
 		this.y = y;
 	}
+	init() {}
+	destroy() {}
 	update() {}
 }

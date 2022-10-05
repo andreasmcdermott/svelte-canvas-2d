@@ -8,6 +8,11 @@ export class Scene {
 
 	static start() {
 		Scene.instance().lastFrame = performance.now();
+
+		for (const entity of entities) {
+			entity.init();
+		}
+
 		requestAnimationFrame(() => instance.update());
 	}
 

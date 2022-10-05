@@ -36,6 +36,30 @@ export class Player extends AnimatedSprite {
 		this.animations = animations;
 		this.setCurrentImage(this.images.idle, this.animations.idle);
 	}
+	init() {
+		super.init();
+
+		document.addEventListener('keydown', this.onKeyDown);
+		document.addEventListener('keyup', this.onKeyUp);
+	}
+
+	onKeyDown = (e: KeyboardEvent) => {
+		switch (e.key) {
+			case 'd':
+				this.vx = 1;
+				break;
+		}
+	};
+	onKeyUp = (e: KeyboardEvent) => {
+		switch (e.key) {
+			case 'd':
+				this.vx = 0;
+				break;
+		}
+	};
+
+	input() {}
+
 	update() {
 		if (this.y < FLOOR_HEIGHT) {
 			this.vy += 1;

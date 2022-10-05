@@ -3,12 +3,15 @@ import { globals } from '$lib/globals';
 import { getImage } from '$lib/utils/images';
 
 export class Tile extends Entity {
-	image: HTMLImageElement;
+	image?: HTMLImageElement;
 	sx: number;
 	sy: number;
 	ts: number;
 	tx: number;
 	ty: number;
+	imageKey: string;
+	w: number | 'canvas' | 'image';
+	h: number | 'canvas' | 'image';
 
 	constructor({
 		x,
@@ -30,27 +33,41 @@ export class Tile extends Entity {
 		ty: number;
 	}) {
 		super({ x, y });
-		this.image = getImage(image);
+		this.imageKey = image;
 		this.sx = 1;
 		this.sy = 1;
 		this.ts = ts;
 		this.tx = tx;
 		this.ty = ty;
-		if (w !== 'image') this.sx = (w === 'canvas' ? globals.canvas.width : w) / this.image.width;
-		if (h !== 'image') this.sy = (h === 'canvas' ? globals.canvas.height : h) / this.image.height;
+		this.w = w;
+		this.h = h;
 	}
+
+	init() {
+		super.init();
+
+		this.image = getImage(this.imageKey);
+		if (this.w !== 'image')
+			this.sx = (this.w === 'canvas' ? globals.canvas.width : this.w) / this.image.width;
+		if (this.h !== 'image')
+			this.sy = (this.h === 'canvas' ? globals.canvas.height : this.h) / this.image.height;
+	}
+
 	update() {
 		super.update();
-		globals.context2d.drawImage(
-			this.image,
-			this.tx * this.ts,
-			this.ty * this.ts,
-			this.ts,
-			this.ts,
-			this.x,
-			this.y,
-			this.image.width * this.sx,
-			this.image.height * this.sy
-		);
+
+		if (this.image) {
+			globals.context2d.drawImage(
+				this.image,
+				this.tx * this.ts,
+				this.ty * this.ts,
+				this.ts,
+				this.ts,
+				this.x,
+				this.y,
+				this.image.width * this.sx,
+				this.image.height * this.sy
+			);
+		}
 	}
 }

@@ -6,6 +6,9 @@ export class Sprite extends Entity {
 	image?: HTMLImageElement;
 	sx: number;
 	sy: number;
+	w: number | 'canvas' | 'image';
+	h: number | 'canvas' | 'image';
+	imageKey: string;
 
 	constructor({
 		x,
@@ -18,17 +21,25 @@ export class Sprite extends Entity {
 		y: number;
 		w: number | 'canvas' | 'image';
 		h: number | 'canvas' | 'image';
-		image?: string;
+		image: string;
 	}) {
 		super({ x, y });
 		this.sx = 1;
 		this.sy = 1;
-		if (image) {
-			this.image = getImage<HTMLImageElement>(image);
-			if (w !== 'image') this.sx = (w === 'canvas' ? globals.canvas.width : w) / this.image.width;
-			if (h !== 'image') this.sy = (h === 'canvas' ? globals.canvas.height : h) / this.image.height;
-		}
+		this.w = w;
+		this.h = h;
+		this.imageKey = image;
 	}
+
+	init() {
+		super.init();
+		this.image = getImage<HTMLImageElement>(this.imageKey);
+		if (this.w !== 'image')
+			this.sx = (this.w === 'canvas' ? globals.canvas.width : this.w) / this.image.width;
+		if (this.h !== 'image')
+			this.sy = (this.h === 'canvas' ? globals.canvas.height : this.h) / this.image.height;
+	}
+
 	update() {
 		super.update();
 		if (this.image) {

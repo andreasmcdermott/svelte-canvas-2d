@@ -38,6 +38,10 @@ export class AnimatedSprite extends Entity {
 		this.frameCount = 0;
 	}
 
+	init() {
+		super.init();
+	}
+
 	setCurrentImage(image: HTMLImageElement, animation: Animation, currentFrame: number = 0) {
 		this.image = image;
 		this.animation = animation;

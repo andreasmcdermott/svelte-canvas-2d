@@ -24,6 +24,11 @@ export class Rect extends Entity {
 		this.h = h;
 		this.fillStyle = fillStyle;
 	}
+
+	init() {
+		super.init();
+	}
+
 	update() {
 		super.update();
 
